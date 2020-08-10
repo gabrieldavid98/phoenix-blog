@@ -1,0 +1,40 @@
+<h1>Show Post</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @post.title %>
+  </li>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @post.body %>
+  </li>
+  <li>
+    <strong>Author:</strong>
+    <%= user_complete_name(@post.user) %>
+  </li>
+
+</ul>
+<%= if is_the_author?(@current_user, @post.user) do %>
+  <span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
+<% end %>
+<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+
+<br />
+
+<%= if length(@post.comments) == 0 do %>
+  <span>No Comments</span>
+<% end %>
+
+<%= render "comment_form.html", 
+  post: @post,
+  changeset: @changeset,
+  action: Routes.post_comment_path(@conn, :add_comment, @post)
+%>
+
+<%= if length(@post.comments) > 0 do %>
+  <%= render "comments.html", post: @post %>
+<% end %>
+

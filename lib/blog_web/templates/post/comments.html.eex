@@ -1,0 +1,10 @@
+<h3>Comments: </h3>
+<ul>
+  <%= for comment <- @post.comments do %>
+    <li>
+      <strong>Author:</strong>
+      <%= user_complete_name(comment.user) %><br />
+      <%= comment.body %>
+    </li>
+  <% end %>
+</ul>
