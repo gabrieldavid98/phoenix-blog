@@ -1,32 +1,39 @@
-<h1>Listing Posts</h1>
+<section class="text-gray-700 body-font overflow-hidden">
+   <div class="container px-5 mt-10 mx-auto">
+      <div class="w-full flex flex-row justify-between items-center mb-16">
+	 <h1 class="text-3xl">Posts</h1>
+	 <%= link "New Post",
+	         to: Routes.post_path(@conn, :new),
+	         class: "text-white font-semibold bg-green-500 p-2 rounded hover:bg-green-600 shadow-md" %>
+      </div>
+      <div class="-my-8">
+	 <%= for post <- @posts do %>
+	    <div class="py-8 flex flex-wrap md:flex-no-wrap">
+               <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+		  <span class="tracking-widest font-medium title-font text-gray-900">
+		     <%= user_complete_name(post.user) |> String.upcase()  %>
+		  </span>
+		  <span class="mt-1 text-gray-500 text-sm">
+		     <%= post.inserted_at %>
+		  </span>
+               </div>
+               <div class="md:flex-grow">
+		  <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
+		     <%= post.title %>
+		  </h2>
+		  <p class="leading-relaxed">
+		     <%= post.body %>
+		  </p>
+		  <a class="text-indigo-500 inline-flex items-center mt-4" href="<%= Routes.post_path(@conn, :show, post.id) %>">Read More
+		     <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M5 12h14"></path>
+			<path d="M12 5l7 7-7 7"></path>
+		     </svg>
+		  </a>
+               </div>
+	    </div>
+	 <% end %>
+      </div>
+   </div>
+</section>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Author</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for post <- @posts do %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.body %></td>
-      <td><%= user_complete_name(post.user) %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.post_path(@conn, :show, post) %></span>
-        <%= if is_the_author?(@current_user, post.user) do %>
-          <span><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
-          <span><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
-        <% end %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>
