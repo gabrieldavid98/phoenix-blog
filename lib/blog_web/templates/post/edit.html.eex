@@ -1,5 +1,10 @@
-<h1>Edit Post</h1>
+<div class="flex flex-col m-16">
+   <div class="w-full flex flex-row justify-between items-center mb-16">
+      <h1 class="text-3xl">Edit Post</h1>
+      <%= link "Back",
+         to: Routes.post_path(@conn, :index),
+         class: "text-white font-semibold bg-red-500 p-2 rounded hover:bg-red-600 shadow-md" %>
+   </div>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :update, @post)) %>
-
-<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+   <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :update, @post)) %>
+</div>

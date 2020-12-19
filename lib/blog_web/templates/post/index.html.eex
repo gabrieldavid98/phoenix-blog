@@ -1,8 +1,8 @@
 <section class="text-gray-700 body-font overflow-hidden">
    <div class="container px-5 mt-10 mx-auto">
       <div class="w-full flex flex-row justify-between items-center mb-16">
-	 <h1 class="text-3xl">Posts</h1>
-	 <%= link "New Post",
+			<h1 class="text-3xl">Posts</h1>
+			<%= link "New Post",
 	         to: Routes.post_path(@conn, :new),
 	         class: "text-white font-semibold bg-green-500 p-2 rounded hover:bg-green-600 shadow-md" %>
       </div>
@@ -36,4 +36,3 @@
       </div>
    </div>
 </section>
-
